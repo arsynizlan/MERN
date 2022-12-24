@@ -1,4 +1,7 @@
 import express from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
@@ -8,6 +11,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(8000, () => {
-  console.log("listening on http://localhost:8000");
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => {
+  console.log(`listening on http://localhost:${port}`);
 });
