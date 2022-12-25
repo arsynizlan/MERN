@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.js";
+import categoryRoutes from "./routes/category.js";
 
 dotenv.config();
 
@@ -18,10 +19,11 @@ mongoose
 /** Middlewares */
 app.use(morgan("dev"));
 app.use(express.json()); // for parsing application/json
-app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+// app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 /** Router Middleware */
 app.use("/api", authRoutes);
+app.use("/api", categoryRoutes);
 
 const port = process.env.PORT || 8000;
 
