@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import morgan from "morgan";
 import authRoutes from "./routes/auth.js";
-import router from "./routes/auth.js";
 
 dotenv.config();
 
@@ -14,6 +14,9 @@ mongoose
   .connect(process.env.DATABASE_URI)
   .then(() => console.log("DB Connected"))
   .catch((err) => console.log("DB Error => ", err));
+
+/** Middlewares */
+app.use(morgan("dev"));
 
 /** Router Middleware */
 app.use("/api", authRoutes);
