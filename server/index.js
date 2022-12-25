@@ -1,23 +1,22 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import authRoutes from "./routes/auth.js";
+import router from "./routes/auth.js";
 
 dotenv.config();
 
 const app = express();
 
-// Database Connection
+/** Database Connection */
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.DATABASE_URI)
   .then(() => console.log("DB Connected"))
   .catch((err) => console.log("DB Error => ", err));
 
-app.get("/", (req, res) => {
-  res.json({
-    data: "Hello World!",
-  });
-});
+/** Router Middleware */
+app.use("/api", authRoutes);
 
 const port = process.env.PORT || 8000;
 
