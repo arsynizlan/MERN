@@ -39,11 +39,59 @@ export const register = async (req, res) => {
       email,
       password: hashedPassword,
     }).save();
-    /** 6.  */
+    /** 6. Create signed JWT */
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
     /** 7. Send Response */
+    res.json({
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        address: user.address,
+      },
+      token,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    /** 1.  Desctructure name, email, password from req.body */
+    const { email, password } = req.body;
+
+    /** 2. Validation */
+
+    if (!email) {
+      return res.json({ error: "email is required" });
+    }
+    if (!password) {
+      return res.json({ error: "password is required" });
+    }
+    if (password.length < 6) {
+      return res.json({ error: "password must be at least 6 characters" });
+    }
+
+    /** 3. Check if email is taken */
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.json({ error: "User not found" });
+    }
+
+    /** 4. Compare the password */
+    const match = await comparePassword(password, user.password);
+    if (!match) {
+      return res.json({ error: "Password is incorrect" });
+    }
+
+    /** 5. Create signed JWT */
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+    /** 6. Send Response */
     res.json({
       user: {
         name: user.name,
