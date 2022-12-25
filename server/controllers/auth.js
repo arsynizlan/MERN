@@ -1,5 +1,9 @@
 import User from "../models/user.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const register = async (req, res) => {
   try {
@@ -35,9 +39,20 @@ export const register = async (req, res) => {
       email,
       password: hashedPassword,
     }).save();
-
-    /** 6. Send Response */
-    res.json(user);
+    /** 6.  */
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+    /** 7. Send Response */
+    res.json({
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        address: user.address,
+      },
+      token,
+    });
   } catch (err) {
     console.log(err);
   }
