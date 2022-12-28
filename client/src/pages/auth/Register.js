@@ -19,14 +19,11 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/register`,
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`/register`, {
+        name,
+        email,
+        password,
+      });
       if (data?.error) {
         toast.error(data.error);
       } else {
