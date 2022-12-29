@@ -11,19 +11,19 @@ export const create = async (req, res) => {
     /** Validation */
     switch (true) {
       case !name.trim():
-        res.json({ error: "Name is required" });
+        return res.json({ error: "Name is required" });
       case !description.trim():
-        res.json({ error: "description is required" });
+        return res.json({ error: "description is required" });
       case !price.trim():
-        res.json({ error: "price is required" });
+        return res.json({ error: "price is required" });
       case !quantity.trim():
-        res.json({ error: "quantity is required" });
+        return res.json({ error: "quantity is required" });
       case !category.trim():
-        res.json({ error: "category is required" });
+        return res.json({ error: "category is required" });
       case !shipping.trim():
-        res.json({ error: "shipping is required" });
+        return res.json({ error: "shipping is required" });
       case photo && photo.size > 1000000:
-        res.json({ error: "Image should be less than 1mb in size" });
+        return res.json({ error: "Image should be less than 1mb in size" });
     }
 
     const product = new Product({ ...req.fields, slug: slugify(name) });

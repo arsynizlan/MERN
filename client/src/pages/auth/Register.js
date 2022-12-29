@@ -41,7 +41,7 @@ export default function Register() {
       <Jumbotron title="Register" />
       <div className="container">
         <div className="row">
-          <div className="col-md-6 offset-md-3">
+          <div className="col-md-6 offset-md-3 mt-4">
             <form onSubmit={handleSubmit}>
               <input
                 type="text"

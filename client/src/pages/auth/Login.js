@@ -45,7 +45,7 @@ export default function Login() {
       <Jumbotron title="Login" />
       <div className="container">
         <div className="row">
-          <div className="col-md-6 offset-md-3">
+          <div className="col-md-6 offset-md-3 mt-4">
             <form onSubmit={handleSubmit}>
               <input
                 type="email"
