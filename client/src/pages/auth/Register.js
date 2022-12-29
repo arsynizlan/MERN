@@ -32,7 +32,7 @@ export default function Register() {
         navigate("/");
       }
     } catch (err) {
-      toast.error("Registration failed");
+      toast.error("Register failed!");
     }
   };
 
@@ -46,7 +46,7 @@ export default function Register() {
               <input
                 type="text"
                 className="form-control mb-4 p-2 "
-                placeholder="Masukan Nama Anda"
+                placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 autoFocus
@@ -55,7 +55,7 @@ export default function Register() {
               <input
                 type="email"
                 className="form-control mb-4 p-2 "
-                placeholder="Masukan Email Anda"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -63,7 +63,7 @@ export default function Register() {
               <input
                 type="password"
                 className="form-control mb-4 p-2 "
-                placeholder="Masukan Password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

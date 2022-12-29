@@ -29,14 +29,14 @@ export default function Login() {
       } else {
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
-        toast.success("Login successful");
+        toast.success("Successfully logged in");
         navigate(
           location.state ||
             `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`
         );
       }
     } catch (err) {
-      toast.error("Login failed");
+      toast.error("Login failed!");
     }
   };
 
@@ -50,7 +50,7 @@ export default function Login() {
               <input
                 type="email"
                 className="form-control mb-4 p-2 "
-                placeholder="Masukan Email Anda"
+                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoFocus
@@ -59,7 +59,7 @@ export default function Login() {
               <input
                 type="password"
                 className="form-control mb-4 p-2 "
-                placeholder="Masukan Password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
